@@ -1,0 +1,21 @@
+USE TicketManagementSystem
+GO
+
+CREATE TABLE TicketStatusLogs 
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    TicketId INT NOT NULL,
+    OldStatus NVARCHAR(20) NOT NULL CHECK (OldStatus IN ('OPEN','IN_PROGRESS','RESOLVED','CLOSED')),
+    NewStatus NVARCHAR(20) NOT NULL
+        CHECK (NewStatus IN ('OPEN','IN_PROGRESS','RESOLVED','CLOSED')),
+
+    ChangedBy INT NOT NULL,
+
+    ChangedAt DATETIME2 NOT NULL DEFAULT GETDATE(),
+
+    FOREIGN KEY (TicketId) REFERENCES Tickets(Id) ON DELETE CASCADE,
+
+    FOREIGN KEY (ChangedBy) REFERENCES Users(Id)
+);
+
+SELECT * FROM TicketStatusLogs

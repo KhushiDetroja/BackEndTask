@@ -1,0 +1,21 @@
+USE TicketManagementSystem
+GO
+
+CREATE TABLE Tickets 
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    Title NVARCHAR(255) NOT NULL,
+    Description NVARCHAR(MAX) NOT NULL,
+    Status NVARCHAR(20) NOT NULL DEFAULT 'OPEN' CHECK (Status IN ('OPEN','IN_PROGRESS','RESOLVED','CLOSED')),
+    Priority NVARCHAR(10) NOT NULL DEFAULT 'MEDIUM' CHECK (Priority IN ('LOW','MEDIUM','HIGH')),
+    CreatedBy INT NOT NULL,
+    AssignedTo INT NULL,
+    CreatedAt DATETIME2 NOT NULL DEFAULT GETDATE(),
+    FOREIGN KEY (CreatedBy) REFERENCES Users(Id),
+    FOREIGN KEY (AssignedTo) REFERENCES Users(Id)
+);
+
+
+
+SELECT * FROM Tickets
+

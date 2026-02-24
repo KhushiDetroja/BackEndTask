@@ -1,0 +1,17 @@
+CREATE DATABASE TicketManagementSystem;
+GO
+
+USE TicketManagementSystem
+GO
+
+CREATE TABLE Roles 
+(
+    Id      INT PRIMARY KEY IDENTITY(1,1),
+    Name    NVARCHAR(20) NOT NULL UNIQUE CHECK (Name IN ('MANAGER', 'SUPPORT', 'USER'))
+);
+
+INSERT INTO Roles (Name) VALUES ('MANAGER');
+INSERT INTO Roles (Name) VALUES ('SUPPORT');
+INSERT INTO Roles (Name) VALUES ('USER');
+
+SELECT * FROM Roles

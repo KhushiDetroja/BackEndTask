@@ -1,0 +1,15 @@
+USE TicketManagementSystem
+GO
+
+CREATE TABLE TicketComments 
+(
+    Id INT PRIMARY KEY IDENTITY(1,1),
+    TicketId INT NOT NULL,
+    UserId INT NOT NULL,
+    Comment NVARCHAR(MAX) NOT NULL,
+    CreatedAt DATETIME2 NOT NULL DEFAULT GETDATE(),
+    FOREIGN KEY (TicketId) REFERENCES Tickets(Id) ON DELETE CASCADE,
+    FOREIGN KEY (UserId) REFERENCES Users(Id)
+);
+
+SELECT * FROM TicketComments
